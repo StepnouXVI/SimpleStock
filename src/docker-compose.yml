@@ -1,0 +1,6 @@
+﻿services:
+  clientgateway:
+    image: clientgateway
+    build:
+      context: .
+      dockerfile: ClientGateway/ClientGateway/Dockerfile

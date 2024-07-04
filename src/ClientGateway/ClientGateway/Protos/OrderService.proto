@@ -1,0 +1,50 @@
+﻿syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/api/annotations.proto";
+
+option csharp_namespace = "ClientGateway";
+
+
+service OrderService {
+  rpc PlaceOrder (PlaceOrderRequest) returns (PlaceOrderResponse) {
+    option (google.api.http) = {
+      post: "/PlaceOrder"
+      body: "*"
+    };
+  }
+}
+
+message PlaceOrderRequest {
+  string symbol = 1;
+  Side side = 2;
+  int64 price = 3;
+  int64 quantity = 4;
+  OrderType orderType = 5;
+}
+
+message PlaceOrderResponse {
+  int64 Id = 1;
+  google.protobuf.Timestamp creationTime = 2;
+  int64 filledQuantity = 3;
+  int64 remainingQuantity = 4;
+  OrderStatus status = 5;
+}
+
+enum Side
+{
+  Buy = 0;
+  Sell = 1;
+}
+
+enum OrderType
+{
+  Market = 0;
+  Limit = 1;
+}
+
+enum OrderStatus
+{
+  New = 0;
+  Cancelled = 1;
+  Filled = 2;
+}
