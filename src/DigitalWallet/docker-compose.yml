@@ -1,0 +1,6 @@
+﻿services:
+  grpcapi:
+    image: grpcapi
+    build:
+      context: .
+      dockerfile: GrpcApi/Dockerfile

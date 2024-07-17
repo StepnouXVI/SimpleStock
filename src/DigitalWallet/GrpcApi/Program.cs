@@ -1,15 +1,15 @@
-using ClientGateway.Interceptors;
-using ClientGateway.Services;
+using GrpcApi.Services;
 using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddGrpc(
-    options =>
-    {
-        options.Interceptors.Add<ValidationInterceptor>();
-    } ).AddJsonTranscoding();
+builder.Services.AddGrpc();
+// Add Validators
+// builder.Services.AddGrpc(
+//     options =>
+//     {
+//         options.Interceptors.Add<ValidationInterceptor>();
+//     } ).AddJsonTranscoding();
 
 builder.Services.AddGrpcSwagger();
 builder.Services.AddSwaggerGen();
@@ -24,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.MapGrpcReflectionService();
 }
-app.MapGrpcService<OrderService>();
+
+app.MapGrpcService<GreeterService>();
 
 app.Run();
