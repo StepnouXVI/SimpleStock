@@ -1,0 +1,71 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "GrpcApi";
+
+
+service WalletService {
+  rpc BalanceTransfer(BalanceTransferRequest) returns (BalanceTransferResponse);
+  rpc ReserveTransfer(ReserveTransferRequest) returns (ReserveTransferResponse);
+  rpc ExecuteReservedTransfer(ExecuteReservedTransferRequest) returns (ExecuteReservedTransferResponse);
+  rpc ReleaseReservedMoney(ReleaseReservedMoneyRequest) returns (ReleaseReservedMoneyResponse);
+} 
+
+
+message BalanceTransferRequest {
+  string from = 1;
+  string to = 2;
+  string amount = 3;
+  string currency = 4;
+  string transaction_id = 5;
+} 
+
+message BalanceTransferResponse {
+  TransactionStatus status = 1;
+  string transaction_id = 2;
+}
+
+message ReserveTransferRequest
+{
+  string from = 1;
+  string to = 2;
+  string amount = 3;
+  string currency = 4;
+  string reservation_id = 5;
+}
+
+message ReserveTransferResponse
+{
+  TransactionStatus status = 1;
+  string transaction_id = 2;
+  optional string details = 3;
+}
+
+message ReleaseReservedMoneyRequest
+{
+  string reservation_id = 1;
+}
+
+message ReleaseReservedMoneyResponse
+{
+  TransactionStatus status = 1;
+  string reservation_id = 2;
+  optional string details = 3;
+}
+
+message ExecuteReservedTransferRequest
+{
+  string reservation_id = 1;
+}
+
+message ExecuteReservedTransferResponse
+{
+  TransactionStatus status = 1;
+  string reservation_id = 2;
+  optional string details = 3;
+}
+
+enum TransactionStatus
+{
+  Success = 0;
+  Failed = 1;
+}

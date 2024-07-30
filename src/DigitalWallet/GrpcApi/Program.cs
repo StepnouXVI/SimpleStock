@@ -1,15 +1,15 @@
 using GrpcApi.Services;
 using FluentValidation;
+using GrpcApi.Interceptors;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddGrpc();
-// Add Validators
-// builder.Services.AddGrpc(
-//     options =>
-//     {
-//         options.Interceptors.Add<ValidationInterceptor>();
-//     } ).AddJsonTranscoding();
+builder.Services.AddGrpc(
+    options =>
+    {
+        options.Interceptors.Add<ValidationInterceptor>();
+    } ).AddJsonTranscoding();
 
 builder.Services.AddGrpcSwagger();
 builder.Services.AddSwaggerGen();
@@ -25,6 +25,6 @@ if (app.Environment.IsDevelopment())
     app.MapGrpcReflectionService();
 }
 
-app.MapGrpcService<GreeterService>();
+app.MapGrpcService<WalletService>();
 
 app.Run();

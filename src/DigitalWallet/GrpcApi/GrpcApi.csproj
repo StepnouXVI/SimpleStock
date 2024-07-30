@@ -1,27 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-    <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>
-        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <Protobuf Include="../../Protos/DigitalWallet/*.proto" GrpcServices="Server"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="FluentValidation" Version="11.9.2"/>
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2"/>
-        <PackageReference Include="Grpc.AspNetCore" Version="2.57.0"/>
-        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.63.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.6"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include=".template.config\template.json"/>
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IncludeHttpRuleProtos>true</IncludeHttpRuleProtos>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.57.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.63.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".template.config\template.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="Protos\WalletService.proto" GrpcServices="Server">
+      <SourceUrl>https://github.com/StepnouXVI/SimpleStock.Proto/raw/main/Proto/Wallet/WalletService.proto</SourceUrl>
+    </Protobuf>
+  </ItemGroup>
 </Project>
